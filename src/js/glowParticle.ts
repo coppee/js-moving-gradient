@@ -1,7 +1,14 @@
+import {rgb} from './app.types'
+import {IGlowParticle} from './glowParticle.types';
+
 const PI2 = Math.PI * 2
 
-export class GlowParticle {
-    constructor(x, y, radius, rgb) {
+export class GlowParticle implements IGlowParticle {
+    private vx: number;
+    private vy: number;
+    private sinValue: number;
+
+    constructor(private x: number, private y: number, private radius: number, private rgb: rgb) {
         this.x = x
         this.y = y
         this.radius = radius
@@ -13,7 +20,7 @@ export class GlowParticle {
         this.sinValue = Math.random()
     }
 
-    animate(ctx, stageWidth, stageHeight) {
+    animate(ctx: CanvasRenderingContext2D, stageWidth: number, stageHeight: number) {
         this.sinValue += 0.01
         this.radius += Math.sin(this.sinValue)
 
